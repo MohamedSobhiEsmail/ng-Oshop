@@ -1,0 +1,101 @@
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">New Product</button>
+
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="row">
+          <div class="col-md-6">
+                <form #f="ngForm" (ngSubmit)="save(f)">
+                        <div class="form-group">
+                          <label for="title">Title</label>
+                          <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" placeholder="Title" id="title" class="form-control" required>
+                          <div class="alert alert-danger"*ngIf="title.touched &&title.invalid">Title Is Requird</div>
+                        </div>
+                        <div class="form-group">
+                          <label for="price">Price</label>
+                          <div class="input-group-prepend">
+                            <span class="input-group-text">$</span>
+                            <input #price="ngModel" [(ngModel)]="product.price" name="price" type="number" placeholder="Price" id="price" class="form-control" required [min]="0">
+                          </div>
+                            <div class="alert alert-danger"*ngIf="price.touched &&price.invalid">
+                             
+                              <div *ngIf="price.errors.required">
+                                      Price Is Requird
+                              </div>
+                              <div *ngIf="price.errors.min">
+                                      Price Should greater than 0
+                              </div>
+                              </div>
+                        </div>
+                        <div class="form-group">
+                          <label for="category">Category</label>
+                          <select #category="ngModel" ngModel name="category" id="category" class="form-control" required>
+                            <option value="">Select Category</option>
+                            <option *ngFor="let category of categories$ | async" [value]="category.key">{{category.payload.val().name}}</option>
+                            </select>
+                            <div class="alert alert-danger"*ngIf="category.touched &&category.invalid">Category Is Requird</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="imageUrl">Image Url</label>
+                            <input #imagUrl="ngModel" [(ngModel)]="product.imageUrl" name="imagUrl" type="text" placeholder="imageUrl" id="imageUrl" class="form-control" required url>
+                            <div class="alert alert-danger"*ngIf="imagUrl.touched &&imagUrl.invalid">
+                              <div *ngIf="imagUrl.errors.required">
+                                      ImagUrl Is Requird
+                              </div>  
+                              <div *ngIf="imagUrl.errors.url">
+                                      ImagUrl Is Invalid URL
+                              </div>  
+                             </div>
+                          </div>
+                          <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Save</button>
+                      </form>
+          </div>
+          <div class="col-md-6">
+                <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" [src]="product.imagUrl"*ngIf="product.imageUrl" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title">{{product.title}}</h5>
+                          <p class="card-text">Price: {{product.price |currency}}</p>
+                          <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                      </div>
+            </div>
+      </div>
+    
+  </div>
+  <div class="modal-footer">
+    <button type="button"  class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
+  </div>
+</ng-template>
+
+
+<table class="table">
+    <thead>
+        <tr>
+        <th>
+            Title
+        </th>
+        <th>
+                Price
+        </th>
+            <th>
+                    Category
+         </th>
+         <th>Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pro of products$ | async">
+        <td>{{pro.payload.val().title}}</td>
+        <td>{{pro.payload.val().price}}</td>
+        <td>{{pro.payload.val().category}}</td>
+        <td><button (click)="edit(content,pro.key)">Edit</button></td>
+    </tr>
+    </tbody>
+</table>
