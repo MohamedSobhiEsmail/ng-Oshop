@@ -16,6 +16,7 @@ export class AdminProductsComponent implements OnInit {
   products$;
   closeResult: string;
   categories$;
+  productId;
   product={};
      constructor(config: NgbModalConfig,
        private modalService: NgbModal,
@@ -29,7 +30,8 @@ export class AdminProductsComponent implements OnInit {
      }
    
      open(content) {
-      
+      this.product={};
+      this.productId=null;
        this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title',size:'lg'}).result.then((result) => {
          this.closeResult = `Closed with: ${result}`;
        }, (reason) => {
@@ -48,11 +50,21 @@ export class AdminProductsComponent implements OnInit {
      }
    save(product)
    {
+console.log(product);
      if(product.valid)
      {
-       this.productService.create(product.value);
+      if(!this.productId)
+       {
+         this.productService.create(product.value);
+         console.log("Created");
+       }
+       else
+         {
+           this.productService.Update(this.productId,product.value);
+           console.log("Updated");
+         }
        this.modalService.dismissAll();
-       this.router.navigateByUrl('/admin/admin/products')
+       this.router.navigateByUrl('/admin/products')
      }
  
    }
@@ -61,7 +73,14 @@ export class AdminProductsComponent implements OnInit {
      
     this.open(content);
     this.productService.getById(id).pipe(take(1)).subscribe(p=>this.product=p);
-    console.log(id);
+    this.productId=id;
+   }
+   delete(id)
+   {
+     if(!confirm('Are You sure you want to delete this product'))return;
+
+    this.productService.delete(id);
+    this.router.navigateByUrl('/admin/products')
    }
 
 }

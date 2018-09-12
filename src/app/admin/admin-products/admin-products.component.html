@@ -13,6 +13,7 @@
           <div class="col-md-6">
                 <form #f="ngForm" (ngSubmit)="save(f)">
                         <div class="form-group">
+                         <!-- <input hidden #productId="ngModel"  [(ngModel)]="product.key" name="productId" id="productId" class="form-control" type="text"> -->
                           <label for="title">Title</label>
                           <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" placeholder="Title" id="title" class="form-control" required>
                           <div class="alert alert-danger"*ngIf="title.touched &&title.invalid">Title Is Requird</div>
@@ -35,7 +36,7 @@
                         </div>
                         <div class="form-group">
                           <label for="category">Category</label>
-                          <select #category="ngModel" ngModel name="category" id="category" class="form-control" required>
+                          <select #category="ngModel" [(ngModel)]="product.category" name="category" id="category" class="form-control" required>
                             <option value="">Select Category</option>
                             <option *ngFor="let category of categories$ | async" [value]="category.key">{{category.payload.val().name}}</option>
                             </select>
@@ -43,7 +44,7 @@
                         </div>
                         <div class="form-group">
                             <label for="imageUrl">Image Url</label>
-                            <input #imagUrl="ngModel" [(ngModel)]="product.imageUrl" name="imagUrl" type="text" placeholder="imageUrl" id="imageUrl" class="form-control" required url>
+                            <input #imagUrl="ngModel" [(ngModel)]="product.imagUrl" name="imagUrl" type="text" placeholder="imageUrl" id="imageUrl" class="form-control" required url>
                             <div class="alert alert-danger"*ngIf="imagUrl.touched &&imagUrl.invalid">
                               <div *ngIf="imagUrl.errors.required">
                                       ImagUrl Is Requird
@@ -58,11 +59,10 @@
           </div>
           <div class="col-md-6">
                 <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" [src]="product.imagUrl"*ngIf="product.imageUrl" alt="Card image cap">
+                        <img class="card-img-top" [src]="product.imagUrl"*ngIf="product.imagUrl" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">{{product.title}}</h5>
                           <p class="card-text">Price: {{product.price |currency}}</p>
-                          <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
                       </div>
             </div>
@@ -88,6 +88,7 @@
                     Category
          </th>
          <th>Edit</th>
+         <th>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -95,7 +96,8 @@
         <td>{{pro.payload.val().title}}</td>
         <td>{{pro.payload.val().price}}</td>
         <td>{{pro.payload.val().category}}</td>
-        <td><button (click)="edit(content,pro.key)">Edit</button></td>
+        <td><button class="btn btn-warning" (click)="edit(content,pro.key)">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="delete(pro.key)">Delete</button></td>
     </tr>
     </tbody>
 </table>
