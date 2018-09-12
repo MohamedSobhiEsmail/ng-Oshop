@@ -24,7 +24,8 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
 import { CategoryService } from './category.service';
 import{FormsModule}from '@angular/forms'
 import { ProductService } from './product.service';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
+import {DataTableModule} from "angular-6-datatable";
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,6 +43,7 @@ import { CustomFormsModule } from 'ng2-validation'
   ],
   imports: [
     BrowserModule,
+    DataTableModule,
     FormsModule,
     CustomFormsModule,
     AngularFireModule.initializeApp(environment.firebase),

@@ -1,30 +1,35 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { NgbModal, ModalDismissReasons, NgbModalConfig } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../../category.service';
 import { ProductService } from '../../product.service';
 import { Router } from '@angular/router';
 import {take, map} from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { product } from '../../models/product';
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit,OnDestroy {
   ngOnInit() {
   
   }
-  products$;
+  products:any[];
+  filteredProducts:any[];
   closeResult: string;
   categories$;
   productId;
   product={};
+  subscription:Subscription;
      constructor(config: NgbModalConfig,
        private modalService: NgbModal,
        private categoryService:CategoryService,
        private productService:ProductService,
        private router:Router)
         {
-          this.products$=this.productService.getProducts(); 
+         this.subscription= this.productService.getProducts()
+         .subscribe(products=>this.filteredProducts= this.products=products); 
        config.backdrop = 'static';
         this.categories$= this.categoryService.getCategories();
      }
@@ -70,7 +75,7 @@ console.log(product);
    }
    edit(content,id)
    {
-     
+     console.log(id);
     this.open(content);
     this.productService.getById(id).pipe(take(1)).subscribe(p=>this.product=p);
     this.productId=id;
@@ -82,5 +87,14 @@ console.log(product);
     this.productService.delete(id);
     this.router.navigateByUrl('/admin/products')
    }
-
+   filter(query:string)
+   {
+ 
+      this.filteredProducts=(query)?this.products.filter(p=>p.payload.val().title.toLowerCase().includes(query.toLowerCase())):
+      this.products;
+   }
+   ngOnDestroy()
+   {
+      this.subscription.unsubscribe();
+   }
 }

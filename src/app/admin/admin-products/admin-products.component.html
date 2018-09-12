@@ -1,5 +1,8 @@
-<button class="btn btn-lg btn-outline-primary" (click)="open(content)">New Product</button>
-
+<p><button class="btn btn-lg btn-outline-primary" (click)="open(content)">New Product</button>
+</p>
+<p>
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="search...">
+</p>
 
 <ng-template #content let-modal>
   <div class="modal-header">
@@ -75,24 +78,24 @@
 </ng-template>
 
 
-<table class="table">
+<table class="table table-striped" [mfData]="filteredProducts" #mf="mfDataTable" [mfRowsOnPage]="5">
     <thead>
         <tr>
-        <th>
-            Title
+        <th >
+            <mfDefaultSorter  by="title">Title</mfDefaultSorter>
         </th>
         <th>
-                Price
+                <mfDefaultSorter by="price">Price</mfDefaultSorter>
         </th>
             <th>
-                    Category
+                    <mfDefaultSorter by="category">category</mfDefaultSorter>
          </th>
          <th>Edit</th>
          <th>Delete</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let pro of products$ | async">
+        <tr *ngFor="let pro of mf.data ">
         <td>{{pro.payload.val().title}}</td>
         <td>{{pro.payload.val().price}}</td>
         <td>{{pro.payload.val().category}}</td>
@@ -100,4 +103,11 @@
         <td><button class="btn btn-danger" (click)="delete(pro.key)">Delete</button></td>
     </tr>
     </tbody>
+    <tfoot>
+            <tr>
+                <td colspan="5">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
 </table>
