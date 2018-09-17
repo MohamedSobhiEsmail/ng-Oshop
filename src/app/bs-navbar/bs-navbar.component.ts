@@ -16,6 +16,7 @@ shoppingCartItemCount:number;
   constructor(private auth:AuthService,private router:Router,private cartService:shoppingCartService) {
 this.auth.appUser$.subscribe(appUser=>{this.appUser=appUser});
   }
+  
  async ngOnInit() {
    let cart$= await this.cartService.getCart();
    cart$.valueChanges().subscribe(cart=>{
@@ -28,7 +29,7 @@ this.auth.appUser$.subscribe(appUser=>{this.appUser=appUser});
      }
    })
   }
-  
+
   logout(){
     this.auth.logout();
     this.router.navigate(['/']);
