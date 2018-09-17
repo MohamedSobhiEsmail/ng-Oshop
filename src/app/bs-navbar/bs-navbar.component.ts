@@ -28,6 +28,7 @@ this.auth.appUser$.subscribe(appUser=>{this.appUser=appUser});
      }
    })
   }
+  
   logout(){
     this.auth.logout();
     this.router.navigate(['/']);
