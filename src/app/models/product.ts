@@ -1,6 +1,7 @@
 export interface product{
+    key:string;
     title:string;
     price:number;
     category:string;
-    imgeUrl:string;
+    imageUrl:string;
 }

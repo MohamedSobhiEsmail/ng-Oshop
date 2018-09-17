@@ -61,13 +61,14 @@
                       </form>
           </div>
           <div class="col-md-6">
-                <div class="card" style="width: 18rem;">
+              <product-card [product]="product"[show-action]="false"></product-card>
+                <!-- <div class="card" *ngIf="product.title" style="width: 18rem;">
                         <img class="card-img-top" [src]="product.imagUrl"*ngIf="product.imagUrl" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title">{{product.title}}</h5>
                           <p class="card-text">Price: {{product.price |currency}}</p>
                         </div>
-                      </div>
+                      </div> -->
             </div>
       </div>
     
@@ -96,9 +97,9 @@
     </thead>
     <tbody>
         <tr *ngFor="let pro of mf.data ">
-        <td>{{pro.payload.val().title}}</td>
-        <td>{{pro.payload.val().price}}</td>
-        <td>{{pro.payload.val().category}}</td>
+        <td>{{pro.title}}</td>
+        <td>{{pro.price}}</td>
+        <td>{{pro.category}}</td>
         <td><button class="btn btn-warning" (click)="edit(content,pro.key)">Edit</button></td>
         <td><button class="btn btn-danger" (click)="delete(pro.key)">Delete</button></td>
     </tr>

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import {take, map} from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { product } from '../../models/product';
+import swal from 'sweetalert';
+
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
@@ -15,8 +17,8 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
   ngOnInit() {
   
   }
-  products:any[];
-  filteredProducts:any[];
+  products:product[];
+  filteredProducts:product[];
   closeResult: string;
   categories$;
   productId;
@@ -55,7 +57,7 @@ export class AdminProductsComponent implements OnInit,OnDestroy {
      }
    save(product)
    {
-console.log(product);
+
      if(product.valid)
      {
       if(!this.productId)
@@ -82,15 +84,41 @@ console.log(product);
    }
    delete(id)
    {
-     if(!confirm('Are You sure you want to delete this product'))return;
+    swal('Are You sure You want to delete',{
+      dangerMode:true,
+      buttons: ["Cancel", true],
+    }).then( result=>{
+      console.log(result)
+      if(result)
+      {
+      this.productService.delete(id);
+        swal(
+          'Deleted!',
+          'Your product  has been deleted.',
+          'success'
+        )
+      }
+      else
+      {
+        swal(
+          'Cancelled',
+          'Your product is safe :)',
+          'error'
+        )
+      }
+    }
 
-    this.productService.delete(id);
-    this.router.navigateByUrl('/admin/products')
-   }
+    );
+
+  //   if(!confirm('Are You sure you want to delete this product'))return;
+
+  //   this.productService.delete(id);
+  //   this.router.navigateByUrl('/admin/products')
+    } 
    filter(query:string)
    {
  
-      this.filteredProducts=(query)?this.products.filter(p=>p.payload.val().title.toLowerCase().includes(query.toLowerCase())):
+      this.filteredProducts=(query)?this.products.filter(p=>p.title.toLowerCase().includes(query.toLowerCase())):
       this.products;
    }
    ngOnDestroy()
