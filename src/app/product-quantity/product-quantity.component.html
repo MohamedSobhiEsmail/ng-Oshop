@@ -1,6 +1,6 @@
 <div class="row no-gutters">
     <div class="col-2">
-      <button (click)="removeFormCart()" class="btn btn-secondary btn-block">-</button>
+      <button *ngIf="ShoppingCart.getquantity(product)>0" (click)="removeFormCart()" class="btn btn-secondary btn-block">-</button>
     </div>
     <div class="col text-center">
        {{ShoppingCart.getquantity(product)}} in Cart

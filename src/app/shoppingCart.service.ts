@@ -46,7 +46,8 @@ console.log(product);
 item$.snapshotChanges().pipe(take(1)).subscribe(item=>{
   this.shoppingCart=item;
   if(item.payload.exists()){
-    item$.update({
+    //console.log(this.shoppingCart.payload.val().quantity);
+     item$.update({
       title:product.title,
       imageUrl:product.imageUrl,
       price:product.price,
@@ -71,10 +72,16 @@ async removeFormCart(product)
    item$.snapshotChanges().pipe(take(1)).subscribe(item=>{
   this.shoppingCart=item;
   if(item.payload.exists()){
-  //  console.log(this.shoppingCart.payload.val().quantity);    
-    item$.update({
+    console.log(this.shoppingCart.payload.val().quantity);    
+  if(this.shoppingCart.payload.val().quantity===1)item$.remove();
+   else item$.update({
     quantity:this.shoppingCart.payload.val().quantity -1});
     }
 });
+}
+async clearCart()
+{
+  let cartId=await this.getOrCreateCartId();
+  this.db.object('/shopping-carts'+cartId).remove();
 }
 }

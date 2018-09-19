@@ -31,6 +31,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import {  shoppingCartService } from './shoppingCart.service';
 import swal from 'sweetalert';
 import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
+import { OrderService } from './order.service';
+import { ShoppingCartSummaryComponent } from './shopping-cart-summary/shopping-cart-summary.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +49,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    ShoppingCartSummaryComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +67,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
       {path:'shopping-cart',component:ShoppingCartComponent},
       {path:'login',component:LoginComponent},
       {path:'my-orders',component:MyOrdersComponent,canActivate:[AuthGuardService]},
-      {path:'checkout',component:CheckoutComponent,canActivate:[AuthGuardService]},
-      {path:'order-success',component:OrderSuccessComponent,canActivate:[AuthGuardService]},
+      {path:'check-out',component:CheckoutComponent,canActivate:[AuthGuardService]},
+      {path:'order-success/:id',component:OrderSuccessComponent,canActivate:[AuthGuardService]},
       {path:'admin/products',component:AdminProductsComponent,canActivate:[AuthGuardService,AdminAuthGuardService]},
       {path:'admin/orders',component:AdminOrdersComponent,canActivate:[AuthGuardService,AdminAuthGuardService]},
       {path:'admin/products/new',component:ProductFormComponent,canActivate:[AuthGuardService,AdminAuthGuardService]}
@@ -78,7 +81,8 @@ import { ProductQuantityComponent } from './product-quantity/product-quantity.co
     AuthGuardService,
     AdminAuthGuardService,
     CategoryService,
-    ProductService,shoppingCartService
+    ProductService,shoppingCartService,
+    OrderService
   ],
   bootstrap: [AppComponent]
 })

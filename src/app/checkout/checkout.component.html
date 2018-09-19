@@ -1,3 +1,40 @@
-<p>
-  checkout works!
-</p>
+<h1>Shipping</h1>
+<div class="row">
+  <div class="col-6">
+    <form #f="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input #name="ngModel" [(ngModel)]="shipping.name" name="name" type="text" placeholder="Name" id="name" class="form-control" required>
+        <div class="alert alert-danger"*ngIf="name.touched &&name.invalid">Name Is Requird</div>
+      </div>
+      <div class="form-group">
+        <label for="address1">Address</label>
+          <input #address1="ngModel" [(ngModel)]="shipping.address1" name="address1" type="text" placeholder="Line 1" id="address1" class="form-control" required >
+        
+          <div class="alert alert-danger"*ngIf="address1.touched &&address1.invalid">
+                    Adrress1 Is Requird
+            </div>
+              <input #address2="ngModel" [(ngModel)]="shipping.address2" name="address2" type="text" placeholder="Line 1" id="address2" class="form-control" required >
+            
+              <div class="alert alert-danger"*ngIf="address2.touched &&address2.invalid">
+                        Adrress2 Is Requird
+                </div>
+      </div>
+
+      <div class="form-group">
+          <label for="city">City</label>
+          <input #city="ngModel" [(ngModel)]="shipping.city" name="city" type="text" placeholder="City" id="city" class="form-control" required >
+          <div class="alert alert-danger"*ngIf="city.touched &&city.invalid">
+            <div *ngIf="city.errors.required">
+              City Is Requird
+            </div>  
+           </div>
+        </div>
+        <button [disabled]="!f.valid" (click)="placeOrder()"  class="btn btn-primary">Place Order</button>
+    </form>
+  </div>
+  <div class="col-6">
+    <shopping-cart-summary [cart]="cart"></shopping-cart-summary>
+  </div>
+
+</div>
