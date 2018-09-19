@@ -4,23 +4,11 @@
       <h5 class="card-title">{{product.title}}</h5>
       <p class="card-text">Price: {{product.price |currency}}</p>
     </div>
-    <div class="card-footer" *ngIf="showActions">
-        <button *ngIf="getquantity()===0;else updateQuantity" (click)="addToCart(product)" 
+    <div class="card-footer" *ngIf="showActions && ShoppingCart">
+        <button *ngIf="ShoppingCart.getquantity(product)===0;else updateQuantity" (click)="addToCart(product)" 
         class="btn btn-outline-secondary btn-block">Add To Cart</button>
         <ng-template #updateQuantity>
-          <div class="row no-gutters">
-             <div class="col-2">
-               <button (click)="removeFormCart()" class="btn btn-secondary btn-block">-</button>
-             </div>
-             <div class="col text-center">
-                {{getquantity()}} in Cart
-             </div>
-             <div class="col-2">
-                <button (click)="addToCart(product)" class="btn btn-secondary btn-block">+</button>
-
-             </div>
-
-          </div>
+        <product-quantity [product]="product"[shopping-cart]="ShoppingCart"></product-quantity>
         </ng-template>
     </div>
   </div>

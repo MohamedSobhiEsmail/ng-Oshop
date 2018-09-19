@@ -19,10 +19,15 @@ export class shoppingCartService {
      createtionDate:new Date().getTime()
    });
   }
-  async getCart()
+  async getCart():Promise<Observable<ShoppingCart>>
   {
     let cartId=await this.getOrCreateCartId();
-    return (this.db.object('/shopping-carts'+cartId)as AngularFireObject<ShoppingCart>)
+    return (this.db.object('/shopping-carts'+cartId)as AngularFireObject<ShoppingCart>).valueChanges()
+    .pipe(map(a=>{
+      return new ShoppingCart(a)
+    }
+    )
+    );
   }
 private async getOrCreateCartId():Promise<string>
 {
@@ -35,21 +40,25 @@ private async getOrCreateCartId():Promise<string>
 }
 async addToCart(product)
 {
-
+console.log(product);
  let cartId=await this.getOrCreateCartId();
- let item$=this.db.object('/shopping-carts' + cartId + '/items' +product.key);
- console.log(product.key);
+ let item$=this.db.object('/shopping-carts' + cartId + '/' +product.key);
 item$.snapshotChanges().pipe(take(1)).subscribe(item=>{
   this.shoppingCart=item;
   if(item.payload.exists()){
-    console.log(this.shoppingCart.payload.val().quantity);    
     item$.update({
+      title:product.title,
+      imageUrl:product.imageUrl,
+      price:product.price,
     quantity:this.shoppingCart.payload.val().quantity +1});
   }
     else{ 
-    console.log(product)
+   // console.log(product)
     item$.set({
-       product:product,
+       //product:product,
+       title:product.title,
+       imageUrl:product.imageUrl,
+       price:product.price,
        quantity:1
     });
   }
@@ -58,11 +67,11 @@ item$.snapshotChanges().pipe(take(1)).subscribe(item=>{
 async removeFormCart(product)
 {
   let cartId=await this.getOrCreateCartId();
- let item$=this.db.object('/shopping-carts' + cartId + '/items' +product.key);
+ let item$=this.db.object('/shopping-carts' + cartId + '/' +product.key);
    item$.snapshotChanges().pipe(take(1)).subscribe(item=>{
   this.shoppingCart=item;
   if(item.payload.exists()){
-    console.log(this.shoppingCart.payload.val().quantity);    
+  //  console.log(this.shoppingCart.payload.val().quantity);    
     item$.update({
     quantity:this.shoppingCart.payload.val().quantity -1});
     }

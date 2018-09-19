@@ -1,3 +1,28 @@
-<p>
-  shopping-cart works!
-</p>
+<h1>Shopping Cart</h1>
+<ng-container *ngIf="cart$  as cart">
+  <p>
+    You have {{cart.ItemsCount}} items in your shopping cart
+  </p>
+  <table class="table table-striped">
+   <thead>
+     <tr>
+     <th>Product</th>
+     <th>Quantity</th>
+     <th>Price</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr *ngFor="let cr of cart.items">
+       <td>{{cr.title}}</td>
+        <td><product-quantity [product]="cr"[shopping-cart]="cart"></product-quantity></td>
+        <!-- <td>{{cr.quantity}}</td> -->
+       <td>{{cr.totalPrice |currency:"USD":true}}</td>
+     </tr>
+   </tbody>
+   <tfoot>
+     <th></th>
+     <th></th>
+     <th>{{cart.totalPrice|currency:"USD":true}}</th>
+   </tfoot>
+  </table>
+</ng-container>

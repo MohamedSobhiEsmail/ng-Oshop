@@ -12,23 +12,17 @@ export class ProductCardComponent implements OnInit {
 @Input('product')product;
 @Input('show-action')showActions=true;
 @Input('shopping-cart')ShoppingCart;
-  constructor(private cartService:shoppingCartService) { }
+  constructor(private cartService:shoppingCartService) { 
+
+  }
   addToCart(product)
   {
     this.cartService.addToCart(product);
   }
-  removeFormCart()
-  {
-    this.cartService.removeFormCart(this.product);
-  }
-  getquantity()
-  {
-    if(!this.ShoppingCart)return 0;
-   //console.log(this.ShoppingCart)
-   let item= this.ShoppingCart["items" + this.product.key]
-   return item? item.quantity: 0;
-  }
+ 
   ngOnInit() {
+    //console.log(this.ShoppingCart);
+
   }
 
 }

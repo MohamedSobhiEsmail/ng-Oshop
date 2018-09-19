@@ -30,6 +30,7 @@ import { ProductFilterComponent } from './product-filter/product-filter.componen
 import { ProductCardComponent } from './product-card/product-card.component';
 import {  shoppingCartService } from './shoppingCart.service';
 import swal from 'sweetalert';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import swal from 'sweetalert';
     LoginComponent,
     ProductFormComponent,
     ProductFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    ProductQuantityComponent
   ],
   imports: [
     BrowserModule,

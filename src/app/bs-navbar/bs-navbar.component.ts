@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { AppUser } from '../models/app-user';
 import { shoppingCartService } from '../shoppingCart.service';
 import { async } from '@angular/core/testing';
+import { Observable } from 'rxjs';
+import { ShoppingCart } from '../models/shopping-cart';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'bs-navbar',
@@ -13,20 +16,15 @@ import { async } from '@angular/core/testing';
 export class BsNavbarComponent implements OnInit {
 appUser:AppUser;
 shoppingCartItemCount:number;
-  constructor(private auth:AuthService,private router:Router,private cartService:shoppingCartService) {
-this.auth.appUser$.subscribe(appUser=>{this.appUser=appUser});
-  }
- async ngOnInit() {
-   let cart$= await this.cartService.getCart();
-   cart$.valueChanges().subscribe(cart=>{
-     this.shoppingCartItemCount=0;
-     console.log(cart);
+cart$:ShoppingCart;
 
-     for(let productId in cart)
-     {
-     this.shoppingCartItemCount+= cart[productId].quantity;
-     }
-   })
+  constructor(private auth:AuthService,private router:Router,private cartService:shoppingCartService) {
+    this.auth.appUser$.subscribe(appUser=>{this.appUser=appUser});
+  }
+  async ngOnInit() {
+ ( await this.cartService.getCart()).subscribe(a=>{this.cart$=a;
+     //console.log(a);
+});
   }
 
   logout(){
