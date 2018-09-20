@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class CheckoutComponent implements OnInit,OnDestroy {
  shipping={};
- cart:ShoppingCart;
+ cart:ShoppingCart=new ShoppingCart({});
  userId;
  subscription:Subscription;
  UserSubscription:Subscription;

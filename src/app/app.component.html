@@ -1,5 +1,8 @@
 <bs-navbar></bs-navbar>
-
 <main role="main" class="container">
+        <div>
+                <button (click)="switchLanguage()"class="btn btn-warning btn-sm">{{lang}}</button>
+                
+       </div>
 <router-outlet></router-outlet>
 </main>

@@ -8,7 +8,7 @@ import { ShoppingCart } from '../models/shopping-cart';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-   cart$:ShoppingCart;
+   cart$:ShoppingCart=new ShoppingCart({});
   constructor(private cartService:shoppingCartService) { }
 
  async ngOnInit() {

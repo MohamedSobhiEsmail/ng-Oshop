@@ -1,0 +1,29 @@
+{
+    "Welcome": "Welcome",
+    "Shipping":"Shipping",
+    "Shopping Cart":"Shopping Cart",
+    "Product":"Product",
+    "Quantity":"Quantity",
+    "Price":"Price",
+    "Check Out":"Check Out",
+    "intro":"You have {{ItemsCount}} items in your shopping cart",
+    "Clear Shopping Cart":"Clear Shopping Cart",
+    "Name":"Name",
+    "Address":"Address",
+    "City":"City",
+    "Place Order":"Place Order",
+    "Order Summery":"Order Summery",
+    "Total":"Total",
+    "City Is Requird":"City Is Requird",
+    "Adrress1 Is Requird":"Adrress1 Is Requird",
+    "Adrress2 Is Requird":"Adrress2 Is Requird",
+    "Name Is Requird":"Name Is Requird",
+    "Adrress 1":"Adress 1",
+    "Adress 2":"Adress 1",
+    "Manage Orders":"Manage Orders",
+    "Manage Products":"Manage Products",
+    "My Orders":"My Orders",
+    "All Categories":"All Categories"
+
+
+}

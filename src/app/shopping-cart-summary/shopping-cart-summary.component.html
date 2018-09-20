@@ -1,7 +1,7 @@
 <div class="card" >
   <div class="card-body">
     <h5 class="card-title">Order Summery</h5>
-    <p class="card-text">You have {{cart.ItemsCount}} items in your cart.</p>
+    <p translate class="card-text">{{ 'intro' | translate:cart }}</p>
   </div>
   <ul class="list-group list-group-flush">
     <li *ngFor="let item of cart.items" class="list-group-item">
@@ -9,7 +9,7 @@
       <div class="float-right">{{item.totalPrice |currency}}</div>
 
     </li>
-    <li class="list-group-item font-weight-bold">
+    <li translate class="list-group-item font-weight-bold">
      Total
      <div class="float-right">{{cart.totalPrice |currency}}</div>
     </li>

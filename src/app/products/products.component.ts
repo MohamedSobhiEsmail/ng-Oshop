@@ -17,8 +17,9 @@ products:product[]=[];
 filterdProducts:product[]=[];
 categories$;
 category:string;
-cart:ShoppingCart;
+cart:ShoppingCart=new ShoppingCart({});
 subscribtion:Subscription;
+lang="ar";
 
   constructor(private productService:ProductService,
     private categoryService:CategoryService,
@@ -28,7 +29,11 @@ subscribtion:Subscription;
 
 
   }
-
+  changeLang()
+  {
+    
+    this.lang="en";
+  }
   async ngOnInit() {
 
     this.productService.getProducts().pipe(switchMap(products=>{
