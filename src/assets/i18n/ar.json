@@ -1,7 +1,7 @@
 {
     "Welcome": "مرحبا",
     "Shipping":"الشحن",
-    "Shopping Cart":"بطاقة التسوق",
+    "Shopping Cart":" بطاقة التسوق ",
     "Product":"المنتج",
     "Quantity":"الكمية",
     "Price":"السعر",
@@ -18,10 +18,31 @@
     "Adrress1 Is Requird":"ادخل العنوان الاول",
     "Adrress2 Is Requird":"ادخل العوان الثاني",
     "Name Is Requird":"ادخل الاسم",
-    "Adrress 1":"العنوان الاول",
-    "Adress 2":"العنوان الثاني",
+    "Address 1":"العنوان الاول",
+    "Address 2":"العنوان الثاني",
     "Manage Orders":"ادارة الطلبات",
     "Manage Products":"ادارة المنتجات",
     "My Orders":"طلباتي",
-    "All Categories":"كل التخصصات"
+    "All Categories":"كل التخصصات",
+    "Add To Cart":"اضافة الي عربة التسوق",
+    "New Product":"منتج جديد",
+    "Title":"الاسم",
+    "Category":"الفئة",
+    "Edit":"تعديل",
+    "Delete":"حذف",
+    "Title Is Requird":"من فضلك ادخل الاسم",
+    "Price Is Requird":"من فضلك ادخل السعر",
+    "Category Is Requird":"من فضلك ادخل الفئة",
+    "ImagUrl Is Requird":"من فضلك ادخل مسار الصورة",
+    "ImageUrl":"مسار الصورة",
+    "Save":"حفظ",
+    "Close":"اغلاق",
+    "Search...":"بحث...",
+    " Price Should greater than 0":" السعر يجب ان يكون اكبر من 0",
+    "ImagUrl Is Invalid URL":"من فضلك ادخل مسار صحيح",
+    "Select Category":"اختار الفئة",
+    "Log Out":"تسجيل الخروج",
+    "LogIn":"تسجيل الدخول"
+
+
 }

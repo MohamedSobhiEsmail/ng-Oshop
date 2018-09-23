@@ -9,12 +9,12 @@
       </div>
       <div class="form-group">
         <label translate for="address1">Address</label>
-          <input  #address1="ngModel" [(ngModel)]="shipping.address1" name="address1" type="text" placeholder="{{'Adrress 1'| translate}}" id="address1" class="form-control" required >
+          <input  #address1="ngModel" [(ngModel)]="shipping.address1" name="address1" type="text" placeholder="{{'Address 1'| translate}}" id="address1" class="form-control" required >
         
           <div translate class="alert alert-danger"*ngIf="address1.touched &&address1.invalid">
                     Adrress1 Is Requird
             </div>
-              <input  #address2="ngModel" [(ngModel)]="shipping.address2" name="address2" type="text" placeholder="{{'Adrress 2'| translate}}" id="address2" class="form-control" required >
+              <input  #address2="ngModel" [(ngModel)]="shipping.address2" name="address2" type="text" placeholder="{{'Address 2'| translate}}" id="address2" class="form-control" required >
             
               <div translate class="alert alert-danger"*ngIf="address2.touched &&address2.invalid">
                         Adrress2 Is Requird

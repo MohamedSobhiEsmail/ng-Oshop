@@ -1,7 +1,7 @@
 {
     "Welcome": "Welcome",
     "Shipping":"Shipping",
-    "Shopping Cart":"Shopping Cart",
+    "Shopping Cart":" Shopping Cart ",
     "Product":"Product",
     "Quantity":"Quantity",
     "Price":"Price",
@@ -18,12 +18,29 @@
     "Adrress1 Is Requird":"Adrress1 Is Requird",
     "Adrress2 Is Requird":"Adrress2 Is Requird",
     "Name Is Requird":"Name Is Requird",
-    "Adrress 1":"Adress 1",
-    "Adress 2":"Adress 1",
+    "Address 1":"Adress 1",
+    "Address 2":"Adress 2",
     "Manage Orders":"Manage Orders",
     "Manage Products":"Manage Products",
     "My Orders":"My Orders",
-    "All Categories":"All Categories"
-
-
+    "All Categories":"All Categories",
+    "Add To Cart":"Add To Cart",
+    "New Product":"New Product",
+    "Title":"Title",
+    "Category":"Category",
+    "Edit":"Edit",
+    "Delete":"Delete",
+    "Title Is Requird":"Title Is Requird",
+    "Price Is Requird":"Price Is Requird",
+    "Category Is Requird":"Category Is Requird",
+    "ImagUrl Is Requird":"ImagUrl Is Requird",
+    "ImageUrl":"ImageUrl",
+    "Save":"Save",
+    "Close":"Close",
+    "Search...":"Search...",
+    " Price Should greater than 0":" Price Should greater than 0",
+    "ImagUrl Is Invalid URL":"ImagUrl Is Invalid URL",
+    "Select Category":"Select Category",
+    "Log Out":"Log Out",
+    "LogIn":"LogIn"
 }

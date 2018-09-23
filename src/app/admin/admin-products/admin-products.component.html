@@ -1,12 +1,12 @@
-<p><button class="btn btn-lg btn-outline-primary" (click)="open(content)">New Product</button>
+<p><button class="btn btn-lg btn-outline-primary" (click)="open(content)" translate>New Product</button>
 </p>
 <p>
-    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="search...">
+    <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="{{'Search...'|translate}}">
 </p>
 
 <ng-template #content let-modal>
   <div class="modal-header">
-    <h4 class="modal-title" id="modal-basic-title">New Product</h4>
+    <h4 class="modal-title" translate id="modal-basic-title">New Product</h4>
     <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -17,47 +17,47 @@
                 <form #f="ngForm" (ngSubmit)="save(f)">
                         <div class="form-group">
                          <!-- <input hidden #productId="ngModel"  [(ngModel)]="product.key" name="productId" id="productId" class="form-control" type="text"> -->
-                          <label for="title">Title</label>
-                          <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" placeholder="Title" id="title" class="form-control" required>
-                          <div class="alert alert-danger"*ngIf="title.touched &&title.invalid">Title Is Requird</div>
+                          <label translate for="title">Title</label>
+                          <input #title="ngModel" [(ngModel)]="product.title" name="title" type="text" placeholder="{{'Title'|translate}}" id="title" class="form-control" required>
+                          <div translate class="alert alert-danger"*ngIf="title.touched &&title.invalid">Title Is Requird</div>
                         </div>
                         <div class="form-group">
-                          <label for="price">Price</label>
+                          <label translate for="price">Price</label>
                           <div class="input-group-prepend">
                             <span class="input-group-text">$</span>
-                            <input #price="ngModel" [(ngModel)]="product.price" name="price" type="number" placeholder="Price" id="price" class="form-control" required [min]="0">
+                            <input #price="ngModel" [(ngModel)]="product.price" name="price" type="number" placeholder="{{'Price'|translate}}" id="price" class="form-control" required [min]="0">
                           </div>
                             <div class="alert alert-danger"*ngIf="price.touched &&price.invalid">
                              
-                              <div *ngIf="price.errors.required">
+                              <div translate *ngIf="price.errors.required">
                                       Price Is Requird
                               </div>
-                              <div *ngIf="price.errors.min">
+                              <div translate *ngIf="price.errors.min">
                                       Price Should greater than 0
                               </div>
                               </div>
                         </div>
                         <div class="form-group">
-                          <label for="category">Category</label>
-                          <select #category="ngModel" [(ngModel)]="product.category" name="category" id="category" class="form-control" required>
-                            <option  value="">Select Category</option>
+                          <label translate for="category">Category</label>
+                          <select  #category="ngModel" [(ngModel)]="product.category" name="category" id="category" class="form-control" required>
+                            <option translate  value="">Select Category</option>
                             <option *ngFor="let category of categories$ | async" [value]="category.key">{{category.payload.val().name}}</option>
                             </select>
-                            <div class="alert alert-danger"*ngIf="category.touched &&category.invalid">Category Is Requird</div>
+                            <div translate class="alert alert-danger"*ngIf="category.touched &&category.invalid">Category Is Requird</div>
                         </div>
                         <div class="form-group">
-                            <label for="imageUrl">Image Url</label>
-                            <input #imagUrl="ngModel" [(ngModel)]="product.imagUrl" name="imagUrl" type="text" placeholder="imageUrl" id="imageUrl" class="form-control" required url>
+                            <label for="imageUrl" translate>Image Url</label>
+                            <input #imagUrl="ngModel" [(ngModel)]="product.imagUrl" name="imagUrl" type="text" placeholder="{{'ImageUrl'|translate}}" id="imageUrl" class="form-control" required url>
                             <div class="alert alert-danger"*ngIf="imagUrl.touched &&imagUrl.invalid">
-                              <div *ngIf="imagUrl.errors.required">
+                              <div translate *ngIf="imagUrl.errors.required">
                                       ImagUrl Is Requird
                               </div>  
-                              <div *ngIf="imagUrl.errors.url">
+                              <div translate *ngIf="imagUrl.errors.url">
                                       ImagUrl Is Invalid URL
                               </div>  
                              </div>
                           </div>
-                          <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Save</button>
+                          <button translate [disabled]="!f.valid" type="submit" class="btn btn-primary">Save</button>
                       </form>
           </div>
           <div class="col-md-6">
@@ -74,7 +74,7 @@
     
   </div>
   <div class="modal-footer">
-    <button type="button"  class="btn btn-outline-dark" (click)="modal.close('Save click')">close</button>
+    <button type="button" translate  class="btn btn-outline-dark" (click)="modal.close('Save click')">Close</button>
   </div>
 </ng-template>
 
@@ -83,16 +83,16 @@
     <thead>
         <tr>
         <th >
-            <mfDefaultSorter  by="title">Title</mfDefaultSorter>
+            <mfDefaultSorter   by="title">{{'Title'|translate}}</mfDefaultSorter>
         </th>
-        <th>
-                <mfDefaultSorter by="price">Price</mfDefaultSorter>
+        <th >
+                <mfDefaultSorter  by="price">{{'Price'|translate}}</mfDefaultSorter>
         </th>
-            <th>
-                    <mfDefaultSorter by="category">category</mfDefaultSorter>
+            <th >
+                    <mfDefaultSorter  by="category">{{'Category'|translate}}</mfDefaultSorter>
          </th>
-         <th>Edit</th>
-         <th>Delete</th>
+         <th translate>Edit</th>
+         <th translate>Delete</th>
         </tr>
     </thead>
     <tbody>
@@ -100,8 +100,8 @@
         <td>{{pro.title}}</td>
         <td>{{pro.price}}</td>
         <td>{{pro.category}}</td>
-        <td><button class="btn btn-warning" (click)="edit(content,pro.key)">Edit</button></td>
-        <td><button class="btn btn-danger" (click)="delete(pro.key)">Delete</button></td>
+        <td><button translate class="btn btn-warning" (click)="edit(content,pro.key)">Edit</button></td>
+        <td><button translate class="btn btn-danger" (click)="delete(pro.key)">Delete</button></td>
     </tr>
     </tbody>
     <tfoot>
